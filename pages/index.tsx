@@ -13,7 +13,6 @@ export default function Home() {
         <title>Create Next App</title>
       </div>
       <main className={styles.main}>
-        <h1 className={styles.title}>Coffee Connoisseur</h1>
         <Banner buttonText="View stores nearby" handleOnClick={handleOnBannerBtnClick}/>
       </main>
     </div>
