@@ -1,7 +1,8 @@
 import styles from '../styles/Home.module.css'
-import Banner from '../components/banner';
-import Head from 'next/head';
-import Image from 'next/image';
+import Banner from '../components/banner'
+import Card from '../components/card'
+import Head from 'next/head'
+import Image from 'next/image'
 
 export default function Home() {
 
@@ -20,6 +21,11 @@ export default function Home() {
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} alt="coffee"/>
         </div>
+        <Card 
+          name='DarkHouse Coffee' 
+          imgUrl="/static/hero-image.png" 
+          href="/coffee-store/darkhouse-coffee"
+          />
       </main>
     </div>
   )
