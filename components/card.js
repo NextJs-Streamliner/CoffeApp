@@ -12,7 +12,7 @@ const Card = (props) => {
                     <h2 className={styles.cardHeader}>{props.name}</h2>
                 </div>
                 <div className={styles.cardImageWrapper}>
-                    <Image src={props.imgUrl} width={260} height={160} className={styles.cardImage}/>
+                    <Image src={props.imgUrl} width={260} height={160} className={styles.cardImage} alt='coffeeshop'/>
                 </div>
             </div>
         </Link>
