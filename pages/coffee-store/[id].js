@@ -1,5 +1,17 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+import coffeeStoreData from "../../data/coffee-stores.json"
+
+export function getStaticProps(staticProps) {
+    const params = staticProps.params
+    return {
+        props: {
+            "coffeeStore" : coffeeStoreData.find(coffeeStore => {
+                return coffeeStore.id === params.id // dynamic id
+            })
+        }
+    }
+}
 
 const CoffeeStore = () => {
     const router = useRouter()
