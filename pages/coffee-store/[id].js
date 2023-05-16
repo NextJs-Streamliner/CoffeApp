@@ -7,9 +7,18 @@ export function getStaticProps(staticProps) {
     return {
         props: {
             "coffeeStore" : coffeeStoreData.find(coffeeStore => {
-                return coffeeStore.id === params.id // dynamic id
+                return coffeeStore.id === 0//params.id // dynamic id
             })
         }
+    }
+}
+
+export function getStaticPaths() {
+    return {
+        paths: [
+            { params: { id: '0'} },
+            { params: { id: '1'} }
+        ]
     }
 }
 
