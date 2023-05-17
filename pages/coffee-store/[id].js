@@ -17,21 +17,24 @@ export function getStaticPaths() {
     return {
         paths: [
             { params: { id: '0'} },
-            { params: { id: '1'} },
-            { params: { id: '300'} }
+            { params: { id: '1'} }
         ],
-        fallback: false
+        fallback: true
     }
 }
 
 const CoffeeStore = (props) => {
     const router = useRouter()
     console.log('props', props)
+    if (router.isFallback) {
+        return <div>Loading</div>
+    }
     return (
         <div>
             Coffee Store Page {router.query.id} 
             <Link href="/">Back to Home</Link>
             <Link href="/coffee-store/dynamic">Go to page dynamic</Link>
+            <p>{props.coffeeStore.address}</p>
             <p>{props.coffeeStore.name}</p>
         </div>
     )
