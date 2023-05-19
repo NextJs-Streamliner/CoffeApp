@@ -7,10 +7,13 @@ import Image from 'next/image'
 import coffeeStoresData from '../data/coffee-stores.json'
 
 export async function getStaticProps(_: any) {
-  console.log("props getStaticProps")
+  const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=bakery&key=${process.env.GOOGLE_PLACES_API_KEY}`)
+  const data = await response.json()
+  console.log(data)
+ 
   return {
     props: {
-      "coffeeStores": coffeeStoresData,
+      "coffeeStores": data.results,
     }, // will be passed to the page component as props
   }
 }
@@ -45,7 +48,7 @@ export default function Home(props: any) {
                       key={store.id}
                       className={styles.card}
                       name={store.name} 
-                      imgUrl={store.imgUrl}
+                      imgUrl={store.icon}
                       href={`/coffee-store/${store.id}`}
                     />
                   )
