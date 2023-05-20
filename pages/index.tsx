@@ -42,11 +42,11 @@ export default function Home(props: any) {
                 {props.coffeeStores.map((store: any) => {
                   return (
                     <Card 
-                      key={store.id}
+                      key={store.place_id}
                       className={styles.card}
                       name={store.name} 
                       imgUrl={store.icon}
-                      href={`/coffee-store/${store.id}`}
+                      href={`/coffee-store/${store.place_id}`}
                     />
                   )
                 })}

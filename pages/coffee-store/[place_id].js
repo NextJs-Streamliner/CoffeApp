@@ -1,27 +1,30 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import coffeeStoreData from "../../data/coffee-stores.json"
 import Head from 'next/head'
 import styles from '../../styles/coffee-store.module.css'
 import Image from "next/image"
 import cls from 'classnames'
 
-export function getStaticProps(staticProps) {
+import { fetchCoffeeStores } from '../../lib/coffee-store'
+
+export async function getStaticProps(staticProps) {
+    const coffeeStores = await fetchCoffeeStores()
     const params = staticProps.params
     return {
         props: {
-            "coffeeStore" : coffeeStoreData.find(coffeeStore => {
-                return coffeeStore.id.toString() === params.id
+            "coffeeStore" : coffeeStores.find(coffeeStore => {
+                return coffeeStore.place_id.toString() === params.place_id
             })
         }
     }
 }
 
-export function getStaticPaths() {
-    const paths = coffeeStoreData.map(coffeeStore => {
+export async function getStaticPaths() {
+    const coffeeStores = await fetchCoffeeStores()
+    const paths = coffeeStores.map(coffeeStore => {
         return {
             params: {
-                id: coffeeStore.id.toString()
+                place_id: coffeeStore.place_id.toString()
             }
         }
     })
