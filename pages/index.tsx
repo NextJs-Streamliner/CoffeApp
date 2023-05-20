@@ -4,16 +4,13 @@ import Card from '../components/card'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import coffeeStoresData from '../data/coffee-stores.json'
+import { fetchCoffeeStores } from '../lib/coffee-store'
 
 export async function getStaticProps(_: any) {
-  const response = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=bakery&key=${process.env.GOOGLE_PLACES_API_KEY}`)
-  const data = await response.json()
-  console.log(data)
- 
+  const coffeeStores = await fetchCoffeeStores()
   return {
     props: {
-      "coffeeStores": data.results,
+      coffeeStores,
     }, // will be passed to the page component as props
   }
 }
