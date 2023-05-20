@@ -41,7 +41,9 @@ const CoffeeStore = (props) => {
         return <div>Loading</div>
     }
     
-    const { address, name, neighbourhood } = props.coffeeStore
+    const { vicinity, name, opening_hours , rating } = props.coffeeStore
+    const isOpen = opening_hours.open_now
+    console.log(`isOpen ${isOpen}`)
 
     const handleUpvoteButton = () => {
         console.log("Handle upvote")
@@ -70,16 +72,16 @@ const CoffeeStore = (props) => {
                 </div>
                 <div className={cls("glass", styles.col2)}>
                     <div className={styles.iconWrapper}>
-                        <Image src="/static/icons/places.svg" width="24" height="24" alt={address}></Image>
-                        <p className={styles.text}>{address}</p>
+                        <Image src="/static/icons/places.svg" width="24" height="24" alt={vicinity}></Image>
+                        <p className={styles.text}>{vicinity}</p>
                     </div>
                     <div className={styles.iconWrapper}>
-                        <Image src="/static/icons/nearMe.svg" width="24" height="24" alt={neighbourhood}></Image>
-                        <p className={styles.text}>{neighbourhood}</p>
+                        <Image src="/static/icons/nearMe.svg" width="24" height="24" alt={isOpen}></Image>
+                        <p className={styles.text}>{isOpen ? "Open" : "Closed"}</p>
                     </div>
                     <div className={styles.iconWrapper}>
                         <Image src="/static/icons/star.svg" width="24" height="24" alt="star"></Image>
-                        <p className={styles.text}>1</p>
+                        <p className={styles.text}>{rating}</p>
                     </div>
                     <button 
                         className={styles.upvoteButton}

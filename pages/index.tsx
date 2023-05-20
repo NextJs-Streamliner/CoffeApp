@@ -46,6 +46,9 @@ export default function Home(props: any) {
                       className={styles.card}
                       name={store.name} 
                       imgUrl={store.icon}
+                      vicinity={store.vicinity}
+                      isOpen={store.name}
+                      rating={store.rating}
                       href={`/coffee-store/${store.place_id}`}
                     />
                   )
