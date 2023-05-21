@@ -5,7 +5,7 @@ import styles from '../../styles/coffee-store.module.css'
 import Image from "next/image"
 import cls from 'classnames'
 
-import { fetchCoffeeStores } from '../../lib/coffee-store'
+import { fetchCoffeeStores, getPlacePhotoUrl } from '../../lib/coffee-store'
 
 export async function getStaticProps(staticProps) {
     const coffeeStores = await fetchCoffeeStores()
@@ -41,7 +41,7 @@ const CoffeeStore = (props) => {
         return <div>Loading</div>
     }
     
-    const { vicinity, name, opening_hours , rating } = props.coffeeStore
+    const { vicinity, name, opening_hours , rating, photos } = props.coffeeStore
     const isOpen = opening_hours.open_now
     console.log(`isOpen ${isOpen}`)
 
@@ -63,7 +63,7 @@ const CoffeeStore = (props) => {
                         <h1 className={styles.name}>{name}</h1>
                     </div>
                     <Image 
-                        src={props.coffeeStore.imgUrl} 
+                        src={getPlacePhotoUrl(photos[0].photo_reference)} 
                         width={600} 
                         height={360} 
                         className={styles.storeImage} 
@@ -76,7 +76,7 @@ const CoffeeStore = (props) => {
                         <p className={styles.text}>{vicinity}</p>
                     </div>
                     <div className={styles.iconWrapper}>
-                        <Image src="/static/icons/nearMe.svg" width="24" height="24" alt={isOpen}></Image>
+                        <Image src="/static/icons/nearMe.svg" width="24" height="24" alt={isOpen.toString()}></Image>
                         <p className={styles.text}>{isOpen ? "Open" : "Closed"}</p>
                     </div>
                     <div className={styles.iconWrapper}>

@@ -4,7 +4,7 @@ import Card from '../components/card'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { fetchCoffeeStores } from '../lib/coffee-store'
+import { fetchCoffeeStores, getPlacePhotoUrl } from '../lib/coffee-store'
 
 export async function getStaticProps(_: any) {
   const coffeeStores = await fetchCoffeeStores()
@@ -45,7 +45,7 @@ export default function Home(props: any) {
                       key={store.place_id}
                       className={styles.card}
                       name={store.name} 
-                      imgUrl={store.icon}
+                      imgUrl={getPlacePhotoUrl(store.photos[0].photo_reference)}
                       vicinity={store.vicinity}
                       isOpen={store.name}
                       rating={store.rating}
