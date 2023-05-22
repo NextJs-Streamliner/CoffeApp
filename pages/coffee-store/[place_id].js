@@ -43,7 +43,6 @@ const CoffeeStore = (props) => {
     
     const { vicinity, name, opening_hours , rating, photos } = props.coffeeStore
     const isOpen = opening_hours.open_now
-    console.log(`isOpen ${isOpen}`)
 
     const handleUpvoteButton = () => {
         console.log("Handle upvote")
