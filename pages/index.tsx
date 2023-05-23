@@ -8,9 +8,12 @@ import { fetchCoffeeStores, getPlacePhotoUrl } from '../lib/coffee-store'
 
 export async function getStaticProps(_: any) {
   const coffeeStores = await fetchCoffeeStores()
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY
+  console.log('apiKey = ', apiKey)
   return {
     props: {
       coffeeStores,
+      apiKey
     }, // will be passed to the page component as props
   }
 }
@@ -45,10 +48,11 @@ export default function Home(props: any) {
                       key={store.place_id}
                       className={styles.card}
                       name={store.name} 
-                      imgUrl={getPlacePhotoUrl(store.photos[0].photo_reference)}
+                      imgUrl={getPlacePhotoUrl(store.photos[0].photo_reference, props.apiKey)}
                       vicinity={store.vicinity}
                       isOpen={store.name}
                       rating={store.rating}
+                      apiKey={props.apiKey}
                       href={`/coffee-store/${store.place_id}`}
                     />
                   )

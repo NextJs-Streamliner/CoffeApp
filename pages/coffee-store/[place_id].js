@@ -9,12 +9,14 @@ import { fetchCoffeeStores, getPlacePhotoUrl } from '../../lib/coffee-store'
 
 export async function getStaticProps(staticProps) {
     const coffeeStores = await fetchCoffeeStores()
+    const apiKey = process.env.GOOGLE_PLACES_API_KEY
     const params = staticProps.params
     return {
         props: {
             "coffeeStore" : coffeeStores.find(coffeeStore => {
                 return coffeeStore.place_id.toString() === params.place_id
-            })
+            }),
+            apiKey
         }
     }
 }
@@ -62,7 +64,7 @@ const CoffeeStore = (props) => {
                         <h1 className={styles.name}>{name}</h1>
                     </div>
                     <Image 
-                        src={getPlacePhotoUrl(photos[0].photo_reference)} 
+                        src={getPlacePhotoUrl(photos[0].photo_reference, props.apiKey)} 
                         width={600} 
                         height={360} 
                         className={styles.storeImage} 
