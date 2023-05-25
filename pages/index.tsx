@@ -6,10 +6,11 @@ import Image from 'next/image'
 
 import { fetchCoffeeStores, getPlacePhotoUrl } from '../lib/coffee-store'
 import useTrackLocation from '../hooks/use-track-location'
+import { useEffect } from 'react'
 
 export async function getStaticProps(_: any) {
   const coffeeStores = await fetchCoffeeStores()
-  const apiKey = process.env.GOOGLE_PLACES_API_KEY
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY
   console.log('apiKey = ', apiKey)
   return {
     props: {
@@ -30,6 +31,20 @@ export default function Home(props: any) {
   const handleOnBannerBtnClick = () => {
     handleTrackLocation()
   }
+
+  useEffect(() => {
+    async function setCoffeeStoresByLocation() {
+      if (latLong) {
+        try {
+          const coffeeStores = await fetchCoffeeStores(latLong);
+          console.log('useEffect coffeeStores = ', coffeeStores)
+        } catch (error) {
+          console.log({error})
+        }
+      }
+    }
+    setCoffeeStoresByLocation()
+  }, [latLong])
 
   return (
     <div>
